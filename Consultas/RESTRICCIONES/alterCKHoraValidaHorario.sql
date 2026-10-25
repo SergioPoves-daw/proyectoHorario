@@ -1,0 +1,3 @@
+ALTER TABLE horario
+ADD CONSTRAINT CK_horaValida
+CHECK (hora BETWEEN 1 AND 7);

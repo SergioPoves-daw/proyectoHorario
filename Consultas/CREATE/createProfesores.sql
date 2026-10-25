@@ -1,0 +1,4 @@
+CREATE TABLE profesores (
+	idProfesor SMALLINT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(100) NOT NULL
+);
