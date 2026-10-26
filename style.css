@@ -1,6 +1,6 @@
 html {
     width: 1000px;
-    background-color: lightcyan;
+    background-color: lightblue;
 }
 
 body {
@@ -30,4 +30,12 @@ select {
 input[type="submit"] {
     padding: 0.6849315068493151%; /* 5px padding y 730px width form */
     background-color: palevioletred;
+    border: solid 1px black;
+}
+
+a {
+    background-color: lightsteelblue;
+    padding: 0.522466039707419%; /* 5px padding y 957px width body */
+    margin: 0.522466039707419%; /* 5px margin y 957px width body */
+    border: solid 1px black;
 }
