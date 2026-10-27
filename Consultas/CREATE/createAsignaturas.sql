@@ -1,5 +1,7 @@
 CREATE TABLE asignaturas (
 	idAsignatura TINYINT AUTO_INCREMENT PRIMARY KEY,
-	nombre VARCHAR(100) NOT NULL,
-	codigo VARCHAR(8) NOT NULL
+	nombre VARCHAR(50) NOT NULL,
+	codigo VARCHAR(8) NOT NULL,
+	idProfesor TINYINT NOT NULL,
+	idClase TINYINT NOT NULL
 );
