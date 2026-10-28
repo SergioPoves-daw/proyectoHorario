@@ -1,5 +1,4 @@
 html {
-    width: 1000px;
     background-color: lightblue;
 }
 
@@ -10,7 +9,7 @@ body {
 }
 
 form {
-    width: 76.28004179728318%; /* 730px width y 957px body (+ 10+10 padding: 750px)*/
+    width: 67.92058516196447%; /* 650px width y 957px body (+ 10+10 padding: 750px)*/
     margin: 2.089864158829676%; /* 20px margin y 957px body */
     padding: 1.044932079414838%; /* 10px margin y 957px body */
     background-color: paleturquoise;
@@ -21,14 +20,14 @@ label {
 }
 
 select {
-    padding: 0.6849315068493151%; /* 5px padding y 730px width form */
-    margin: 0.273972602739726%; /* 2px margin y 730px width form */
+    padding: 0.7692307692307692%; /* 5px padding y 650px width form */
+    margin: 0.3076923076923077%; /* 2px margin y 650px width form */
     background-color: palegreen;
     border: solid 1px black;
 }
 
 input[type="submit"] {
-    padding: 0.6849315068493151%; /* 5px padding y 730px width form */
+    padding: 0.7692307692307692%; /* 5px padding y 650px width form */
     background-color: palevioletred;
     border: solid 1px black;
 }
