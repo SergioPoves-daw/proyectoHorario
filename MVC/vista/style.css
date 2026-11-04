@@ -21,7 +21,6 @@ label {
 
 select {
     padding: 0.7692307692307692%; /* 5px padding y 650px width form */
-    margin: 0.3076923076923077%; /* 2px margin y 650px width form */
     background-color: palegreen;
     border: solid 1px black;
 }
@@ -37,4 +36,33 @@ a {
     padding: 0.522466039707419%; /* 5px padding y 957px width body */
     margin: 0.522466039707419%; /* 5px margin y 957px width body */
     border: solid 1px black;
+}
+
+table {
+    margin: 20px;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: solid 2px black;
+    padding: 10px;
+}
+
+a {
+    padding: 5px;
+    border: solid 2px black;
+    margin: 70px;
+    background-color: lightgray;
+}
+
+td a {
+    margin: 5px;
+}
+
+th {
+    background-color: palegreen;
+}
+
+td {
+    background-color: paleturquoise;
 }
