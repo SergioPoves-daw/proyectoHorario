@@ -3,7 +3,7 @@
 
     class Casignatura {
         public $mensaje;
-        private $vista = './../vista/infoAsignaturas.php';
+        private $vista;
 
         // Obtener filas de la BD
         function obtenerAsignaturas() {

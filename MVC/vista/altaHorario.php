@@ -25,7 +25,7 @@
 
                 for ($i = 0; $i < 7; $i++) {
                     echo '<p>';
-                        echo $i . 'a Hora ' . $horas[$i] . ' '; 
+                        echo $i+1 . 'a Hora ' . $horas[$i] . ' '; 
                         echo '<select name="' . $i . '">';
                             foreach ($asignaturas as $asignatura) {
                                 echo '<option>' . $asignatura["codigo"] . '</option>';
