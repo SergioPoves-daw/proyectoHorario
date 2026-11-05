@@ -24,7 +24,7 @@
 
         function insertarDatosHorario() {
             $datos = new Cmodelo();
-            $asignaturas = $datos->obtenerAsignaturas();
+            $asignaturas = $datos->obtenerAsignaturasClase(2);
             $this->vista = './../vista/altaHorario.php';
             include $vista;
         }
