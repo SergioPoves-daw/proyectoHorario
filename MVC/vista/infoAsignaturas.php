@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Asignaturas</title>
-        <link rel="stylesheet" href="./../vista/style.css">
+        <link rel="stylesheet" href="../MVC/vista/style.css">
     </head>
     <body>
         <h1>TABLA DE ASIGNATURAS / COLOR</h1>

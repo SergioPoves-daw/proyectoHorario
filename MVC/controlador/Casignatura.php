@@ -1,24 +1,23 @@
 <?php
-    require 'C:\xampp\htdocs\proyectoHorario\MVC\modelo\Cmodelo.php';
+    require '../MVC/modelo/Cmodelo.php';
 
     class Casignatura {
         public $mensaje;
-        private $vista;
+        public $vista;
 
         // Obtener filas de la BD
         function obtenerAsignaturas() {
             $datos = new Cmodelo();
             $asignaturas = $datos->obtenerAsignaturas();
-            $this->vista = './../vista/infoAsignaturas.php';
-            include $vista;
+            $this->vista = '../MVC/vista/infoAsignaturas.php'; // Cambiar a relativa
+            return $asignaturas;
         }
-
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
         function obtenerAsignatura($id) {
             $datos = new Cmodelo();
             $asignatura = $datos->obtenerAsignatura($id);
-            $this->vista = './../vista/infoAsignaturas.php';
+            $this->vista = '../MVC/vista/infoAsignaturas.php';
             include $vista;
         }
 
