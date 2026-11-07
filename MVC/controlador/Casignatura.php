@@ -17,8 +17,8 @@
         function obtenerAsignatura($id) {
             $datos = new Cmodelo();
             $asignatura = $datos->obtenerAsignatura($id);
-            $this->vista = '../MVC/vista/infoAsignaturas.php';
-            include $vista;
+            $this->vista = '../MVC/vista/formularioModificar.php';
+            return $asignatura;
         }
 
         function insertarDatosHorario() {
@@ -27,27 +27,59 @@
             $this->vista = './../vista/altaHorario.php';
             include $vista;
         }
-
-        /*
+        
         // Insertar fila
-        function insertarDatos($asignatura, $color) {
-            $sql = 'INSERT INTO asignaturas(nombre, color) VALUES("' . $asignatura . '", "' . $color . '");';
-            $resultado = $this->conexion->query($sql);
-            $this->mensaje = "Asignatura añadida";
+        function insertarAsignatura($nombre, $codigo, $profesor, $clase) {
+            $datos = new Cmodelo();
+
+            if ($this->validar($nombre, $codigo)) {
+                $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
+                $this->mensaje = "Asignatura añadida";
+            }
+
+            else {
+                $this->mensaje = "Datos no válidos";
+            }
         }
 
         // Modifica la fila
-        function modificarFila($id, $nombre, $color) {
-            $sql = 'UPDATE asignaturas SET nombre ="' . $nombre . '", color="' . $color . '" WHERE idAsignatura = ' . $id . ';';
-            $this->conexion->query($sql);
-            $this->mensaje = "Asignatura modificada";
+        function modificarAsignatura($id, $nombre, $codigo) {
+            $datos = new Cmodelo();
+
+            if ($this->validar($nombre, $codigo)) {
+                $datos->modificarAsignatura($id, $nombre, $codigo);
+                $this->mensaje = "Asignatura modificada";
+            }
+
+            else {
+                $this->mensaje = "Datos no válidos";
+            }            
         }
 
-        // Elimina la fila
+        // Validar que existen las variables y que no estén vacías
+        function validar($nombre, $codigo) {
+            return !empty($nombre) && !empty($codigo);
+        }
+
+        /* Elimina la fila
         function eliminarAsignatura($id) {
             $sql = 'DELETE FROM asignaturas WHERE idAsignatura = ' . $id . ';';
             $this->conexion->query($sql);
             $this->mensaje = "Asignatura eliminada";
         }*/
+
+        function obtenerProfesores() {
+            $datos = new Cmodelo();
+            $profesores = $datos->obtenerProfesores();
+            $this->vista = '../MVC/vista/formularioInsertar.php';
+            return $profesores;
+        }
+
+        function obtenerClases() {
+            $datos = new Cmodelo();
+            $clases = $datos->obtenerClases();
+            $this->vista = '../MVC/vista/formularioInsertar.php';
+            return $clases;
+        }
     }
 ?>

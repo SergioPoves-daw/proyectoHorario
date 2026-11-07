@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Asignaturas</title>
-        <link rel="stylesheet" href="../MVC/vista/style.css">
+        <link rel="stylesheet" href="../MVC/vista/style.css"/>
     </head>
     <body>
         <h1>TABLA DE ASIGNATURAS / COLOR</h1>
         <table>
             <tr>
                 <th>ASIGNATURA</th>
+                <th>CÓDIGO</th>
                 <th>PROCESO</th>
             </tr>
             <?php
@@ -25,10 +26,11 @@
 
                         echo '<tr>';
                         echo '<td>' . $asignatura["nombre"] . '</td>';
+                        echo '<td>' . $asignatura["codigo"] . '</td>';
                         echo '<td>';
 
                         // Mandar ID por GET a la página modificar e índice 0 para "m" (Modificar)
-                        echo '<a href="control.php?id=' . $accion["id"] . '&action=' . $accion[0] . '">M</a>';
+                        echo '<a href="../MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[0] . '">M</a>';
 
                         // Mandar ID por GET a la página eliminar e índice 1 para "e" (Eliminar)
                         echo '<a href="control.php?id=' . $accion["id"] . '&action=' . $accion[1] . '">E</a>';
@@ -43,6 +45,6 @@
                 }
             ?>
         </table>
-        <a href="./formularioInsertar.html">Añadir</a>
+        <a href="../procesos/listarAltaAsignatura.php">Añadir</a>
     </body>
 </html>
