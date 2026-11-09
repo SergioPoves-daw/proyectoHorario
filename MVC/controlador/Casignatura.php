@@ -31,8 +31,8 @@
         // Insertar fila
         function insertarAsignatura($nombre, $codigo, $profesor, $clase) {
             if ($this->validar($nombre, $codigo)) {
-            $datos = new Cmodelo();    
-            $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
+                $datos = new Cmodelo();    
+                $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
                 $this->mensaje = "Asignatura añadida";
             }
 
@@ -86,12 +86,5 @@
             $this->vista = '../MVC/vista/formularioInsertar.php';
             return $clases;
         }
-
-        /*function insertarDatosHorario() {
-            $datos = new Cmodelo();
-            $asignaturas = $datos->obtenerAsignaturasClase(2);
-            $this->vista = './../vista/altaHorario.php';
-            include $vista;
-        }*/
     }
 ?>
