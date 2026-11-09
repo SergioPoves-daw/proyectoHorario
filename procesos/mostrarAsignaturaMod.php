@@ -5,6 +5,6 @@
     $id = $_GET["id"];
 
     $proceso = new Casignatura();
-    $asignatura = $proceso->obtenerAsignatura($id, "m");
+    $asignatura = $proceso->obtenerAsignaturaModificar($id);
     include $proceso->vista;
 ?>

@@ -14,14 +14,20 @@
         }
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
-        function obtenerAsignatura($id, $accion) {
+        function obtenerAsignaturaModificar($id) {
             $datos = new Cmodelo();
             $asignatura = $datos->obtenerAsignatura($id);
-            if ($accion == "m") $this->vista = '../MVC/vista/formularioModificar.php';
-            if ($accion == "e") $this->vista = '../MVC/vista/confirmarEliminar.php';
+            $this->vista = '../MVC/vista/formularioModificar.php';
             return $asignatura;
         }
         
+        function obtenerAsignaturaEliminar($id) {
+            $datos = new Cmodelo();
+            $asignatura = $datos->obtenerAsignatura($id);
+            $this->vista = '../MVC/vista/confirmarEliminar.php';
+            return $asignatura;
+        }
+
         // Insertar fila
         function insertarAsignatura($nombre, $codigo, $profesor, $clase) {
             if ($this->validar($nombre, $codigo)) {
