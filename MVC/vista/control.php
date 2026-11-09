@@ -11,6 +11,6 @@
 
     if ($control["action"] == "e") { // Eliminar
         // echo '<p>Vas a eliminar</p>';
-        header("Location: confirmarEliminar.php?id=" . $control["id"]);
+        header("Location: ../../procesos/confirmarEliminar.php?id=" . $control["id"]);
     }
 ?>

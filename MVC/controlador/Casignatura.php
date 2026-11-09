@@ -14,26 +14,19 @@
         }
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
-        function obtenerAsignatura($id) {
+        function obtenerAsignatura($id, $accion) {
             $datos = new Cmodelo();
             $asignatura = $datos->obtenerAsignatura($id);
-            $this->vista = '../MVC/vista/formularioModificar.php';
+            if ($accion == "m") $this->vista = '../MVC/vista/formularioModificar.php';
+            if ($accion == "e") $this->vista = '../MVC/vista/confirmarEliminar.php';
             return $asignatura;
-        }
-
-        function insertarDatosHorario() {
-            $datos = new Cmodelo();
-            $asignaturas = $datos->obtenerAsignaturasClase(2);
-            $this->vista = './../vista/altaHorario.php';
-            include $vista;
         }
         
         // Insertar fila
         function insertarAsignatura($nombre, $codigo, $profesor, $clase) {
-            $datos = new Cmodelo();
-
             if ($this->validar($nombre, $codigo)) {
-                $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
+            $datos = new Cmodelo();    
+            $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
                 $this->mensaje = "Asignatura añadida";
             }
 
@@ -44,9 +37,8 @@
 
         // Modifica la fila
         function modificarAsignatura($id, $nombre, $codigo) {
-            $datos = new Cmodelo();
-
             if ($this->validar($nombre, $codigo)) {
+                $datos = new Cmodelo();
                 $datos->modificarAsignatura($id, $nombre, $codigo);
                 $this->mensaje = "Asignatura modificada";
             }
@@ -56,18 +48,24 @@
             }            
         }
 
+        // Elimina la fila
+        function eliminarAsignatura($id) {
+            if (!empty($id)) {
+                $datos = new Cmodelo();
+                $datos->eliminarAsignatura($id);
+                $this->mensaje = "Asignatura eliminada correctamente";
+            }
+            else {
+                $this->mensaje = "Asignatura no encontrada";
+            }
+        }
+
         // Validar que existen las variables y que no estén vacías
         function validar($nombre, $codigo) {
             return !empty($nombre) && !empty($codigo);
         }
 
-        /* Elimina la fila
-        function eliminarAsignatura($id) {
-            $sql = 'DELETE FROM asignaturas WHERE idAsignatura = ' . $id . ';';
-            $this->conexion->query($sql);
-            $this->mensaje = "Asignatura eliminada";
-        }*/
-
+        // Obtener filas de profesores
         function obtenerProfesores() {
             $datos = new Cmodelo();
             $profesores = $datos->obtenerProfesores();
@@ -75,11 +73,19 @@
             return $profesores;
         }
 
+        // Obtener filas de clases
         function obtenerClases() {
             $datos = new Cmodelo();
             $clases = $datos->obtenerClases();
             $this->vista = '../MVC/vista/formularioInsertar.php';
             return $clases;
         }
+
+        /*function insertarDatosHorario() {
+            $datos = new Cmodelo();
+            $asignaturas = $datos->obtenerAsignaturasClase(2);
+            $this->vista = './../vista/altaHorario.php';
+            include $vista;
+        }*/
     }
 ?>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../vista/style.css">
+    <link rel="stylesheet" href="../MVC/vista/style.css">
     <title>Alta Horario</title>
 </head>
     <body>
@@ -28,7 +28,7 @@
                         echo $i+1 . 'a Hora ' . $horas[$i] . ' '; 
                         echo '<select name="' . $i . '">';
                             foreach ($asignaturas as $asignatura) {
-                                echo '<option>' . $asignatura["codigo"] . '</option>';
+                                echo '<option value="' . $asignatura[$idAsignatura] . '">' . $asignatura["codigo"] . '</option>';
                             }
                         echo '</select>';
                     echo '</p>';

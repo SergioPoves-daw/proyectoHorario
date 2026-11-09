@@ -30,19 +30,6 @@
             return $asignatura;
         }
 
-        function obtenerAsignaturasClase($idClase) {
-            $sql = "SELECT * FROM asignaturas WHERE idClase = " . $idClase;
-            $resultado = $this->conexion->query($sql);
-            $asignaturas = [];
-            
-            if ($resultado->num_rows > 0) {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $asignaturas[] = $fila;
-                }
-            }
-            return $asignaturas;
-        }
-
         function insertarAsignatura($asignatura, $codigo, $profesor, $clase) {
             $sql = 'INSERT INTO asignaturas(nombre, codigo, idProfesor, idClase) VALUES("' . $asignatura . '", "' . $codigo . '", ' . $profesor . ', ' . $clase . ');';
             $this->conexion->query($sql);
@@ -50,6 +37,11 @@
 
         function modificarAsignatura($id, $nombre, $codigo) {
             $sql = 'UPDATE asignaturas SET nombre ="' . $nombre . '", codigo="' . $codigo . '" WHERE idAsignatura = ' . $id . ';';
+            $this->conexion->query($sql);
+        }
+
+        function eliminarAsignatura($id) {
+            $sql = 'DELETE FROM asignaturas WHERE idAsignatura = ' . $id . ';';
             $this->conexion->query($sql);
         }
 

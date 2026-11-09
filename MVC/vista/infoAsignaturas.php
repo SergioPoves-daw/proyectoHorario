@@ -33,7 +33,7 @@
                         echo '<a href="../MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[0] . '">M</a>';
 
                         // Mandar ID por GET a la página eliminar e índice 1 para "e" (Eliminar)
-                        echo '<a href="control.php?id=' . $accion["id"] . '&action=' . $accion[1] . '">E</a>';
+                        echo '<a href="../MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[1] . '">E</a>';
 
                         echo '</td>';
                         echo '</tr>';
