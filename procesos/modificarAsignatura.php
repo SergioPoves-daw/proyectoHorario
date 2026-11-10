@@ -8,7 +8,5 @@
 
     $proceso = new Casignatura();
     $proceso->modificarAsignatura($id, $nombre, $codigo);
-
-    header("refresh:3 url=listarAsignaturas.php");
     echo '<p>' . $proceso->mensaje . '</p>';
 ?>

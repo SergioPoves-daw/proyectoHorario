@@ -9,14 +9,13 @@
     <body>
         <h1>ALTA HORARIO</h1>
         <p>Se muestran las asignaturas de la clase</p>
-        <form action="" method="GET">
-            <p>Día actual: Lunes</p>
-
-            <?php
+        <?php
+        echo '<form action="insertarHorario.php?clase=' . $idClase . '&hora=' . $horas[0] . '&dia=1" method="POST">';
+            echo '<p>Día actual: Lunes</p>';
                 for ($i = 0; $i < 7; $i++) {
                     echo '<p>';
                         echo $i+1 . 'a Hora ' . $horas[$i] . ' '; 
-                        echo '<select name="asignatura">';
+                        echo '<select name="asignatura[]">';
                             foreach ($asignaturas as $asignatura) {
                                 echo '<option value="' . $asignatura["idAsignatura"] . '">' . $asignatura["codigo"] . '</option>';
                             }

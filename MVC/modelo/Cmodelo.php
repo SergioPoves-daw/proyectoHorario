@@ -9,6 +9,7 @@
             $this->conexion = $conexion;
         }
 
+        // Obtener todas las asignaturas
         function obtenerAsignaturas() {
             $sql = "SELECT * FROM asignaturas";
             $resultado = $this->conexion->query($sql);
@@ -23,6 +24,7 @@
             return $asignaturas;
         }
 
+        // Obtener una asignatura concreta
         function obtenerAsignatura($id) {
             $sql = 'SELECT * FROM asignaturas WHERE idAsignatura = ' . $id . ';';
             $resultado = $this->conexion->query($sql);
@@ -30,21 +32,25 @@
             return $asignatura;
         }
 
+        // Insertar una asignatura
         function insertarAsignatura($asignatura, $codigo, $profesor, $clase) {
             $sql = 'INSERT INTO asignaturas(nombre, codigo, idProfesor, idClase) VALUES("' . $asignatura . '", "' . $codigo . '", ' . $profesor . ', ' . $clase . ');';
             $this->conexion->query($sql);
         }
 
+        // Modificar una asignatura concreta
         function modificarAsignatura($id, $nombre, $codigo) {
             $sql = 'UPDATE asignaturas SET nombre ="' . $nombre . '", codigo="' . $codigo . '" WHERE idAsignatura = ' . $id . ';';
             $this->conexion->query($sql);
         }
 
+        // Eliminar una asignatura concreta
         function eliminarAsignatura($id) {
             $sql = 'DELETE FROM asignaturas WHERE idAsignatura = ' . $id . ';';
             $this->conexion->query($sql);
         }
 
+        // Obtener todos los profesores
         function obtenerProfesores() {
             $sql = 'SELECT * FROM profesores';
             $resultado = $this->conexion->query($sql);
@@ -58,6 +64,7 @@
             return $profesores;
         }
 
+        // Obtener todas las clases
         function obtenerClases() {
             $sql = 'SELECT * FROM clases';
             $resultado = $this->conexion->query($sql);

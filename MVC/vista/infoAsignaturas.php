@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../MVC/vista/style.css"/>
     </head>
     <body>
-        <h1>TABLA DE ASIGNATURAS / COLOR</h1>
+        <h1>TABLA DE ASIGNATURAS</h1>
         <table>
             <tr>
                 <th>ASIGNATURA</th>

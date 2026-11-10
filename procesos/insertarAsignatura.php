@@ -1,18 +1,14 @@
 <?php
     require '../MVC/controlador/Casignatura.php';
 
-    // Recibe la información del formulario y manda la información al controlador
-    if (isset($_POST["nombre"])) $nombre = $_POST["nombre"];
-    if (isset($_POST["codigo"])) $codigo = $_POST["codigo"];
-    if (isset($_POST["profesor"])) $profesor = $_POST["profesor"];
-    if (isset($_POST["clase"])) $clase = $_POST["clase"];
+    // Recibe la información del formulario de vista/formularioInsertar.php y manda la información al controlador
+    $nombre = $_POST["nombre"];
+    $codigo = $_POST["codigo"];
+    $profesor = $_POST["profesor"];
+    $clase = $_POST["clase"];
 
+    // Inserta la asignatura y muestra el mensaje de validación
     $proceso = new Casignatura();
-    if ($nombre && $codigo && $profesor && $clase) {
-        $proceso->insertarAsignatura($nombre, $codigo, $profesor, $clase);
-    } 
-    else $proceso->mensaje = "Formulario vacío no válido";
-
-    header("refresh: 3 url=listarAsignaturas.php");
+    $proceso->insertarAsignatura($nombre, $codigo, $profesor, $clase);
     echo '<p>' . $proceso->mensaje . '</p>';
 ?>
