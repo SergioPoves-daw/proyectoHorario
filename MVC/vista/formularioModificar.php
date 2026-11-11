@@ -1,7 +1,3 @@
-<?php
-    $id = $_GET["id"]; // <a> manda los datos por GET y lo recibe el .php
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

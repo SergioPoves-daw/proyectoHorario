@@ -77,5 +77,13 @@
             }
             return $clases;
         }
+
+        // Obtener una clase concreta
+        function obtenerClase($idClase) {
+            $sql = 'SELECT * FROM clases WHERE idClase = ' . $idClase . ';';
+            $resultado = $this->conexion->query($sql);
+            $clase = $resultado->fetch_assoc();
+            return $clase;
+        }
     }
 ?>

@@ -10,7 +10,8 @@
         <h1>ALTA HORARIO</h1>
         <p>Se muestran las asignaturas de la clase</p>
         <?php
-        echo '<form action="insertarHorario.php?clase=' . $idClase . '&hora=' . $horas[0] . '&dia=1" method="POST">';
+        echo '<form action="insertarHorario.php method="POST">';
+            echo '<input type="hidden" name="clase" value="' . $idClase . '">';
             echo '<p>Día actual: Lunes</p>';
                 for ($i = 0; $i < 7; $i++) {
                     echo '<p>';
