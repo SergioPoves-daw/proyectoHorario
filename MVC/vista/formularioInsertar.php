@@ -17,7 +17,7 @@
             <?php
                 echo '<label for="profesor">Profesor: </label>';
                 echo '<select id="profesor" name="profesor">';
-                    foreach ($profesores as $profesor) {
+                    foreach ($clasesProfesores["profesores"] as $profesor) {
                         echo '<option value="' . $profesor["idProfesor"] . '">' . $profesor["nombre"] . '</option>';
                     }
                 echo '</select>';
@@ -25,7 +25,7 @@
 
                 echo '<label for="clase">Clase: </label>';
                 echo '<select id="clase" name="clase">';
-                    foreach ($clases as $clase) {
+                    foreach ($clasesProfesores["clases"] as $clase) {
                         echo '<option value="' . $clase["idClase"] . '">' . $clase["nombre"] . '</option>';
                     }
                 echo '</select>';

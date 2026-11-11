@@ -9,7 +9,7 @@
     <h1>Eliminar asignatura</h1>
     <?php
         echo '<p>¿Estás seguro de que quieres eliminar la asignatura ' . $asignatura["nombre"] . '?</p>';
-        echo '<a href="../procesos/eliminarAsignatura.php?id=' . $id . '">Si</a>';
+        echo '<a href="../procesos/eliminarAsignatura.php?id=' . $asignatura["idAsignatura"] . '">Si</a>';
     ?>
     <a href="../procesos/listarAsignaturas.php">No</a>
 </body>

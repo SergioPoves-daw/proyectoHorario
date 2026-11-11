@@ -14,7 +14,10 @@
         }
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
-        function obtenerAsignaturaModificar($id) {
+        function obtenerAsignaturaModificar() {
+            // Lo recibe del header de vista/control.php
+            $id = $_GET["id"];
+    
             if ($this->validarIdAsignatura($id)) {
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
@@ -27,7 +30,10 @@
             }
         }
         
-        function obtenerAsignaturaEliminar($id) {
+        function obtenerAsignaturaEliminar() {
+            // Lo recibe del header de vista/control.php
+            $id = $_GET["id"];
+
             if ($this->validarIdAsignatura($id)) {
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
@@ -41,7 +47,15 @@
         }
 
         // Insertar fila de nueva asignatura
-        function insertarAsignatura($nombre, $codigo, $profesor, $clase) {
+        function insertarAsignatura() {
+            // Recibe la información del formulario de vista/formularioInsertar.php
+            $nombre = $_POST["nombre"];
+            $codigo = $_POST["codigo"];
+            $profesor = $_POST["profesor"];
+            $clase = $_POST["clase"];
+
+            $this->vista = '../MVC/vista/mensajeValidacion.php';
+
             if ($this->validar($nombre, $codigo) && !empty($profesor) && !empty($clase)) {
                 $datos = new Cmodelo();    
                 $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
@@ -56,7 +70,14 @@
         }
 
         // Modifica la fila de una asignatura
-        function modificarAsignatura($id, $nombre, $codigo) {
+        function modificarAsignatura() {
+            // Lo recibe del form vista/formularioModificar.php
+            $id = $_GET["id"];
+            $nombre = $_POST["nombre"];
+            $codigo = $_POST["codigo"];
+
+            $this->vista = '../MVC/vista/mensajeValidacion.php';
+
             if ($this->validarIdAsignatura($id) && $this->validar($nombre, $codigo)) {
                 $datos = new Cmodelo();
                 $datos->modificarAsignatura($id, $nombre, $codigo);
@@ -71,11 +92,15 @@
         }
 
         // Elimina la fila de asignatura concreta
-        function eliminarAsignatura($id) {
+        function eliminarAsignatura() {
+            // Lo recibe del <a href> de vista/confirmarEliminar.php
+            $id = $_GET["id"];
+            
+            $this->vista = '../MVC/vista/mensajeValidacion.php';
+
             if (!empty($id)) {
                 $datos = new Cmodelo();
                 $datos->eliminarAsignatura($id);
-                $this->vista = '../MVC/vista/infoAsignaturas.php';
                 $this->mensaje = "Asignatura eliminada correctamente";
                 header("refresh: 3 url=listarAsignaturas.php");
             }
@@ -122,6 +147,17 @@
             else {
                 header("Location: listarAsignaturas.php");
             }
+        }
+
+        // Obtener clases y profesores
+        function obtenerClasesYProfesores() {
+            $clasesProfesores = [
+                "clases" => $this->obtenerClases(),
+                "profesores" => $this->obtenerProfesores()
+            ];
+
+            $this->vista = '../MVC/vista/formularioInsertar.php';
+            return $clasesProfesores;
         }
 
         /* VALIDACIONES */

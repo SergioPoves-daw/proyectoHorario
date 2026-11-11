@@ -1,12 +1,8 @@
 <?php
     require '../MVC/controlador/Casignatura.php';
 
-    // Lo recibe del form vista/formularioModificar.php
-    $id = $_GET["id"];
-    $nombre = $_POST["nombre"];
-    $codigo = $_POST["codigo"];
-
+    // Hace la función de modificar los datos de la BD
     $proceso = new Casignatura();
-    $proceso->modificarAsignatura($id, $nombre, $codigo);
-    echo '<p>' . $proceso->mensaje . '</p>';
+    $proceso->modificarAsignatura();
+    include $proceso->vista;
 ?>
