@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Asignaturas</title>
-        <link rel="stylesheet" href="../MVC/vista/style.css"/>
+        <link rel="stylesheet" href="MVC/vista/style.css"/>
     </head>
     <body>
         <h1>TABLA DE ASIGNATURAS</h1>
@@ -30,10 +30,10 @@
                         echo '<td>';
 
                         // Mandar ID por GET a la página modificar e índice 0 para "m" (Modificar)
-                        echo '<a href="../MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[0] . '">M</a>';
+                        echo '<a href="MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[0] . '">M</a>';
 
                         // Mandar ID por GET a la página eliminar e índice 1 para "e" (Eliminar)
-                        echo '<a href="../MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[1] . '">E</a>';
+                        echo '<a href="MVC/vista/control.php?id=' . $accion["id"] . '&action=' . $accion[1] . '">E</a>';
 
                         echo '</td>';
                         echo '</tr>';
@@ -45,6 +45,6 @@
                 }
             ?>
         </table>
-        <a href="../procesos/listarAltaAsignatura.php">Añadir</a>
+        <a href="index.php?controlador=Casignatura&metodo=obtenerClasesYProfesores">Añadir</a>
     </body>
 </html>

@@ -5,12 +5,10 @@
     ];
 
     if ($control["action"] == "m") { // Modificar
-        // echo '<p>Vas a modificar</p>';
-        header('Location: ../../procesos/mostrarAsignaturaMod.php?id=' . $control["id"]);
+        header('Location: ../../index.php?controlador=Casignatura&metodo=obtenerAsignaturaModificar&id=' . $control["id"]);
     }
 
     if ($control["action"] == "e") { // Eliminar
-        // echo '<p>Vas a eliminar</p>';
-        header("Location: ../../procesos/confirmarEliminar.php?id=" . $control["id"]);
+        header('Location: ../../index.php?controlador=Casignatura&metodo=obtenerAsignaturaEliminar&id=' . $control["id"]);
     }
 ?>

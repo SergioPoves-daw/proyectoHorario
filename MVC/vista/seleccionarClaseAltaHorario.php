@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../MVC/vista/style.css">
+        <link rel="stylesheet" href="MVC/vista/style.css">
         <title>Seleccionar clase</title>
     </head>
     <body>
         <h1>SELECCIONAR CLASE PARA ASIGNAR HORARIO</h1>
-        <form action="altaHorario.php" method="POST">
+        <form action="index.php?controlador=Chorario&metodo=introducirDatosHorario" method="POST">
             <p>Clases:</p>
             <select name="clase">
             <?php

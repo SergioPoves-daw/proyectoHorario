@@ -6,6 +6,6 @@
         <title>Validación</title>
     </head>
     <body>
-        <?php echo '<p>' . $proceso->mensaje . '</p>'; ?>
+        <?php echo '<p>' . $this->mensaje . '</p>'; ?>
     </body>
 </html>

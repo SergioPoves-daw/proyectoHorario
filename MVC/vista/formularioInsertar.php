@@ -3,11 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Añadir fila</title>
-        <link rel="stylesheet" href="../MVC/vista/style.css"/>
+        <link rel="stylesheet" href="MVC/vista/style.css"/>
     </head>
     <body>
         <h1>Añadir asignatura</h1>
-        <form action="insertarAsignatura.php" method="POST">
+        <form action="index.php?controlador=Casignatura&metodo=insertarAsignatura" method="POST">
             <label for="nombre">Asignatura: </label>
             <input type="text" id="nombre" size=30 name="nombre"/><br/><br/>
 

@@ -1,5 +1,5 @@
 <?php
-    require '../MVC/modelo/Cmodelo.php';
+    require 'MVC/modelo/Cmodelo.php';
 
     class Casignatura {
         public $mensaje;
@@ -9,40 +9,40 @@
         function obtenerAsignaturas() {
             $datos = new Cmodelo();
             $asignaturas = $datos->obtenerAsignaturas();
-            $this->vista = '../MVC/vista/infoAsignaturas.php'; // Cambiar a relativa
-            return $asignaturas;
+            $this->vista = 'MVC/vista/infoAsignaturas.php';
+            include $this->vista;
         }
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
         function obtenerAsignaturaModificar() {
-            // Lo recibe del header de vista/control.php
+            // Lo recibe del index.php que recibe el valor del header de vista/control.php
             $id = $_GET["id"];
     
             if ($this->validarIdAsignatura($id)) {
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
-                $this->vista = '../MVC/vista/formularioModificar.php';
-                return $asignatura;
+                $this->vista = 'MVC/vista/formularioModificar.php';
+                include $this->vista;
             }
 
             else {
-                header("Location: listarAsignaturas.php");
+                header("Location: index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
             }
         }
         
         function obtenerAsignaturaEliminar() {
-            // Lo recibe del header de vista/control.php
+            // Lo recibe del index.php que recibe el valor del header de vista/control.php
             $id = $_GET["id"];
 
             if ($this->validarIdAsignatura($id)) {
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
-                $this->vista = '../MVC/vista/confirmarEliminar.php';
-                return $asignatura;
+                $this->vista = 'MVC/vista/confirmarEliminar.php';
+                include $this->vista;
             }
 
             else {
-                header("Location: listarAsignaturas.php");
+                header("Location: index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
             }
         }
 
@@ -54,19 +54,21 @@
             $profesor = $_POST["profesor"];
             $clase = $_POST["clase"];
 
-            $this->vista = '../MVC/vista/mensajeValidacion.php';
+            $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if ($this->validar($nombre, $codigo) && !empty($profesor) && !empty($clase)) {
                 $datos = new Cmodelo();    
                 $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
                 $this->mensaje = "Asignatura añadida correctamente";
-                header("refresh: 3 url=listarAsignaturas.php");
+                
             }
 
             else {
                 $this->mensaje = "Datos no válidos";
-                header("refresh: 3 url=listarAsignaturas.php");
             }
+
+            header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+            include $this->vista;
         }
 
         // Modifica la fila de una asignatura
@@ -76,19 +78,20 @@
             $nombre = $_POST["nombre"];
             $codigo = $_POST["codigo"];
 
-            $this->vista = '../MVC/vista/mensajeValidacion.php';
+            $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if ($this->validarIdAsignatura($id) && $this->validar($nombre, $codigo)) {
                 $datos = new Cmodelo();
                 $datos->modificarAsignatura($id, $nombre, $codigo);
                 $this->mensaje = "Asignatura modificada correctamente";
-                header("refresh:3 url=listarAsignaturas.php");
             }
 
             else {
                 $this->mensaje = "Datos no válidos";
-                header("refresh:3 url=listarAsignaturas.php");
             }            
+
+            header("refresh:3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+            include $this->vista;
         }
 
         // Elimina la fila de asignatura concreta
@@ -96,26 +99,27 @@
             // Lo recibe del <a href> de vista/confirmarEliminar.php
             $id = $_GET["id"];
             
-            $this->vista = '../MVC/vista/mensajeValidacion.php';
+            $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if (!empty($id)) {
                 $datos = new Cmodelo();
                 $datos->eliminarAsignatura($id);
                 $this->mensaje = "Asignatura eliminada correctamente";
-                header("refresh: 3 url=listarAsignaturas.php");
             }
 
             else {
                 $this->mensaje = "Asignatura no encontrada";
-                header("refresh: 3 url=listarAsignaturas.php");
             }
+
+            header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+            include $this->vista;
         }
 
         // Obtener filas de profesores
         function obtenerProfesores() {
             $datos = new Cmodelo();
             $profesores = $datos->obtenerProfesores();
-            $this->vista = '../MVC/vista/formularioInsertar.php';
+            $this->vista = 'MVC/vista/formularioInsertar.php';
             return $profesores;
         }
 
@@ -123,15 +127,7 @@
         function obtenerClases() {
             $datos = new Cmodelo();
             $clases = $datos->obtenerClases();
-            $this->vista = '../MVC/vista/formularioInsertar.php';
-            return $clases;
-        }
-
-        // Obtener filas de clases para alta horario
-        function obtenerClasesHorario() {
-            $datos = new Cmodelo();
-            $clases = $datos->obtenerClases();
-            $this->vista = '../MVC/vista/seleccionarClaseAltaHorario.php';
+            $this->vista = 'MVC/vista/formularioInsertar.php';
             return $clases;
         }
 
@@ -140,7 +136,7 @@
             if ($this->validarIdClase($idClase)) {
                 $datos = new CmodeloHorario();
                 $asignaturas = $datos->obtenerAsignaturasClase($idClase);
-                $this->vista = '../MVC/vista/altaHorario.php';
+                $this->vista = 'MVC/vista/altaHorario.php';
                 return $asignaturas;
             }
 
@@ -156,8 +152,8 @@
                 "profesores" => $this->obtenerProfesores()
             ];
 
-            $this->vista = '../MVC/vista/formularioInsertar.php';
-            return $clasesProfesores;
+            $this->vista = 'MVC/vista/formularioInsertar.php';
+            include $this->vista;
         }
 
         /* VALIDACIONES */
