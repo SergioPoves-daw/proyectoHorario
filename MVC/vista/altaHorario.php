@@ -13,13 +13,14 @@
         <?php
             echo '<input type="hidden" name="clase" value="' . $idClase . '">';
             echo '<p>Día actual: ' . $dias[$dia] . '</p>';
-                for ($i = 0; $i < 7; $i++) {
+                for ($i = 1; $i <= 7; $i++) {
                     echo '<p>';
-                        echo $i+1 . 'a Hora ' . $horas[$i] . ' '; 
-                        echo '<select name="asignatura[]">';
+                        echo $i . 'a Hora ' . $horas[$i] . ' '; 
+                        echo '<select name="asignaturas[]">';
                             foreach ($asignaturas as $asignatura) {
                                 echo '<option value="' . $asignatura["idAsignatura"] . '">' . $asignatura["codigo"] . '</option>';
                             }
+                        echo '<input type="hidden" name="horas[]" value="' . $i . '">';
                         echo '</select>';
                     echo '</p>';
                 }

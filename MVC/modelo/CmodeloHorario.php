@@ -9,7 +9,7 @@
 
         // Obtener todas las clases
         function obtenerClases() {
-            $sql = 'SELECT * FROM clases';
+            $sql = 'SELECT * FROM clases;';
             $resultado = $this->conexion->query($sql);
             $clases = [];
 
@@ -23,7 +23,7 @@
 
         // Obtiene las asignaturas de una clase específica
         function obtenerAsignaturasClase($idClase) {
-            $sql = "SELECT * FROM asignaturas WHERE idClase = " . $idClase;
+            $sql = 'SELECT * FROM asignaturas WHERE idClase = ' . $idClase . ';';
             $resultado = $this->conexion->query($sql);
             $asignaturas = [];
             
@@ -33,6 +33,13 @@
                 }
             }
             return $asignaturas;
+        }
+
+        function obtenerProfesorAsignatura($idAsignatura) {
+            $sql = 'SELECT idProfesor FROM asignaturas WHERE idAsignatura = '. $idAsignatura . ';';
+            $resultado = $this->conexion->query($sql);
+            $profesor = $resultado->fetch_array();
+            return $profesor["idProfesor"];
         }
     }
 ?>
