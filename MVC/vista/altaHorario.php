@@ -12,7 +12,7 @@
         <form action="index.php?controlador=Chorario&metodo=introducirDatosHorario" method="POST">
         <?php
             echo '<input type="hidden" name="clase" value="' . $idClase . '">';
-            echo '<p>Día actual: Lunes</p>';
+            echo '<p>Día actual: ' . $dias[$dia] . '</p>';
                 for ($i = 0; $i < 7; $i++) {
                     echo '<p>';
                         echo $i+1 . 'a Hora ' . $horas[$i] . ' '; 
@@ -23,9 +23,19 @@
                         echo '</select>';
                     echo '</p>';
                 }
-            ?>
-            <input type="submit" value="Siguiente"/>
+            
+            if ($dia != "V") {
+                echo '<input type="hidden" name="dia" value="' . $dia . '">';
+                echo '<input type="hidden" name="siguienteDia" value="' . $siguienteDia . '">';
+                echo '<input type="submit" value="Siguiente"/>';
+            }
+
+            else {
+                echo '<input type="hidden" name="dia" value="V">';
+                echo '<input type="submit" value="Guardar horario"/>';
+            }
+        ?>
         </form>
-        <a href="./..">Volver</a>
+        <a href="index.html">Volver</a>
     </body>
 </html>

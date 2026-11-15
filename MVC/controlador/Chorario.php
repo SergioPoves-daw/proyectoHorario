@@ -26,6 +26,43 @@
                 6 => "14:15-15:30"
             ];
 
+            $dias = [
+                "L" => "Lunes",
+                "M" => "Martes",
+                "X" => "Miércoles",
+                "J" => "Jueves",
+                "V" => "Viernes"
+            ];
+
+            if (isset($_POST["siguienteDia"])) {
+                $dia = $_POST["siguienteDia"];
+            }
+            else {
+                $dia = "L";
+            }
+
+            switch ($dia) {
+                case "L": 
+                    $siguienteDia = "M";
+                    break;
+
+                case "M":
+                    $siguienteDia = "X";
+                    break;
+
+                case "X":
+                    $siguienteDia = "J";
+                    break;
+
+                case "J":
+                    $siguienteDia = "V";
+                    break;
+            }
+
+            if (isset($_POST["dia"]) && $_POST["dia"] == "V") {
+                header("Location: index.html");
+            }
+
             $datos = new CmodeloHorario();
             $asignaturas = $datos->obtenerAsignaturasClase($idClase);
             $this->vista = 'MVC/vista/altaHorario.php';

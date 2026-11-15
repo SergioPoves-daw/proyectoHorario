@@ -1,82 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./MVC/vista/style.css">
-    <title>Alta Horario</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="MVC/vista/style.css">
+        <title>Document</title>
+    </head>
     <body>
-        <h1>ALTA HORARIO</h1>
-        <p>Se muestran las asignaturas de la clase</p>
-        <form action="" method="GET">
-            <p>Día actual: Lunes</p>
-
-            <p>
-                1a Hora 8:15-9:10 
-                <select name="1">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                2a Hora 9:10-10:05 
-                <select name="2">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                3a Hora 10:05-11:00 
-                <select name="3">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                4a Hora 11:30-12:25
-                <select name="4">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                5a Hora 12:25-13:20
-                <select name="5">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                6a Hora 13:20-14:15
-                <select name="6">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <p>
-                7a Hora 14:15-15:00
-                <select name="7">
-                    <option>DWESV</option>
-                    <option>DWENC</option>
-                    <option>DEAP</option>
-                    <option>PIMOD</option>
-                </select>
-            </p>
-            <input type="submit" value="Siguiente"/>
-        </form>
-        <a href="./..">Volver</a>
+        <h1>MENÚ</h1>
+        <div>
+            <a href="index.php?controlador=Casignatura&metodo=obtenerAsignaturas">ASIGNATURAS</a>
+            <a href="index.php?controlador=Chorario&metodo=obtenerClasesHorario">HORARIOS</a>
+        </div>
     </body>
 </html>
