@@ -9,18 +9,18 @@
     <h1>Modificar asignatura</h1>
     <?php
     // Usar el id recibido del <a> en el form para que modificar.php sepa a qué fila (id) referirse
-    echo '<form action="index.php?controlador=Casignatura&metodo=modificarAsignatura&id=' . $asignatura["idAsignatura"] . '" method="POST">';
-        echo '<p>ID: ' . $asignatura["idAsignatura"] . '</p>';
+    echo '<form action="index.php?controlador=Casignatura&metodo=modificarAsignatura&id=' . $datos["idAsignatura"] . '" method="POST">';
+        echo '<p>ID: ' . $datos["idAsignatura"] . '</p>';
 
         // Valor por defecto el nombre de la asignatura
         echo '<label for="nombre">Nombre: </label>';
-        echo '<input type="text" id="nombre" name="nombre" size=30 value="'. $asignatura["nombre"] . '"/>';
+        echo '<input type="text" id="nombre" name="nombre" size=30 value="'. $datos["nombre"] . '"/>';
 
         echo '<br/><br/>';
         
         // Valor por defecto el color de la asignatura
         echo '<label for="codigo">Código: </label>';
-        echo '<input type="text" id="codigo" name="codigo" maxlength=7 value="'. $asignatura["codigo"] . '"/>';
+        echo '<input type="text" id="codigo" name="codigo" maxlength=7 value="'. $datos["codigo"] . '"/>';
     ?>
         <br/><br/>
         <input type="submit" value="Modificar asignatura">

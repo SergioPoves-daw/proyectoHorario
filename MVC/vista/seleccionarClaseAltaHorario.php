@@ -12,7 +12,7 @@
             <p>Clases:</p>
             <select name="clase">
             <?php
-                foreach ($clases as $clase) {
+                foreach ($datos as $clase) {
                     echo '<option value=' . $clase["idClase"] . '>' . $clase["nombre"] . '</option>';
                 }
             ?>
@@ -20,5 +20,6 @@
             <br/><br/>
             <input type="submit" value="Continuar">
         </form>
+        <a href="index.php?controlador=Cinicio&metodo=mostrarMenu">Volver</a>
     </body>
 </html>

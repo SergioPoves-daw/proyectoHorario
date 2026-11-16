@@ -11,23 +11,39 @@
         <p>Se muestran las asignaturas de la clase</p>
         <form action="index.php?controlador=Chorario&metodo=introducirDatosHorario" method="POST">
         <?php
-            echo '<input type="hidden" name="clase" value="' . $idClase . '">';
-            echo '<p>Día actual: ' . $dias[$dia] . '</p>';
+            echo '<input type="hidden" name="clase" value="' . $datos["clase"] . '">';
+            echo '<p>Día actual: ' . $datos["dias"][$datos["dia"]] . '</p>';
+            if ($datos["dia"] == "L") {
                 for ($i = 1; $i <= 7; $i++) {
                     echo '<p>';
-                        echo $i . 'a Hora ' . $horas[$i] . ' '; 
+                        echo $i . 'a Hora ' . $datos["horas"][$i] . ' '; 
                         echo '<select name="asignaturas[]">';
-                            foreach ($asignaturas as $asignatura) {
+                            foreach ($datos["asignaturas"] as $asignatura) {
                                 echo '<option value="' . $asignatura["idAsignatura"] . '">' . $asignatura["codigo"] . '</option>';
                             }
                         echo '<input type="hidden" name="horas[]" value="' . $i . '">';
                         echo '</select>';
                     echo '</p>';
                 }
+            }
+
+            else {
+                for ($i = 1; $i <= 6; $i++) {
+                    echo '<p>';
+                        echo $i . 'a Hora ' . $datos["horas"][$i] . ' '; 
+                        echo '<select name="asignaturas[]">';
+                            foreach ($datos["asignaturas"] as $asignatura) {
+                                echo '<option value="' . $asignatura["idAsignatura"] . '">' . $asignatura["codigo"] . '</option>';
+                            }
+                        echo '<input type="hidden" name="horas[]" value="' . $i . '">';
+                        echo '</select>';
+                    echo '</p>';
+                }
+            }
             
-            if ($dia != "V") {
-                echo '<input type="hidden" name="dia" value="' . $dia . '">';
-                echo '<input type="hidden" name="siguienteDia" value="' . $siguienteDia . '">';
+            if ($datos["dia"] != "V") {
+                echo '<input type="hidden" name="dia" value="' . $datos["dia"] . '">';
+                echo '<input type="hidden" name="siguienteDia" value="' . $datos["siguienteDia"] . '">';
                 echo '<input type="submit" value="Siguiente"/>';
             }
 
@@ -37,6 +53,6 @@
             }
         ?>
         </form>
-        <a href="index.html">Volver</a>
+        <a href="index.php?controlador=Cinicio&metodo=mostrarMenu">Volver</a>
     </body>
 </html>

@@ -17,7 +17,7 @@
             <?php
                 echo '<label for="profesor">Profesor: </label>';
                 echo '<select id="profesor" name="profesor">';
-                    foreach ($clasesProfesores["profesores"] as $profesor) {
+                    foreach ($datos["profesores"] as $profesor) {
                         echo '<option value="' . $profesor["idProfesor"] . '">' . $profesor["nombre"] . '</option>';
                     }
                 echo '</select>';
@@ -25,7 +25,7 @@
 
                 echo '<label for="clase">Clase: </label>';
                 echo '<select id="clase" name="clase">';
-                    foreach ($clasesProfesores["clases"] as $clase) {
+                    foreach ($datos["clases"] as $clase) {
                         echo '<option value="' . $clase["idClase"] . '">' . $clase["nombre"] . '</option>';
                     }
                 echo '</select>';
@@ -35,6 +35,6 @@
 
             <input type="submit" value="Añadir">
         </form>
-        <a href="listarAsignaturas.php">Volver</a>
+        <a href="index.php?controlador=Casignatura&metodo=obtenerAsignaturas">Volver</a>
     </body>
 </html>

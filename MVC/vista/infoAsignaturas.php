@@ -15,8 +15,8 @@
             </tr>
             <?php
                 // Mandar las asignaturas (array) a la función para mostrar la tabla
-                if (isset($asignaturas)) {
-                    foreach ($asignaturas as $asignatura) {
+                if (isset($datos)) {
+                    foreach ($datos as $asignatura) {
                         // $accion dentro del foreach para coger el ID de cada asignatura
                         $accion = [
                             "id" => $asignatura["idAsignatura"], // ID de la asignatura
@@ -46,5 +46,6 @@
             ?>
         </table>
         <a href="index.php?controlador=Casignatura&metodo=obtenerClasesYProfesores">Añadir</a>
+        <a href="index.php?controlador=Cinicio&metodo=mostrarMenu">Volver</a>
     </body>
 </html>

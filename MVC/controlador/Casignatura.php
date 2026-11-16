@@ -1,5 +1,6 @@
 <?php
     require 'MVC/modelo/Cmodelo.php';
+    require 'MVC/modelo/CmodeloClase.php';
 
     class Casignatura {
         public $mensaje;
@@ -10,7 +11,7 @@
             $datos = new Cmodelo();
             $asignaturas = $datos->obtenerAsignaturas();
             $this->vista = 'MVC/vista/infoAsignaturas.php';
-            include $this->vista;
+            return $asignaturas;
         }
         
         // Obtiene la fila individual entera de la asignatura del ID correspondiente
@@ -22,7 +23,7 @@
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
                 $this->vista = 'MVC/vista/formularioModificar.php';
-                include $this->vista;
+                return $asignatura;
             }
 
             else {
@@ -38,7 +39,8 @@
                 $datos = new Cmodelo();
                 $asignatura = $datos->obtenerAsignatura($id);
                 $this->vista = 'MVC/vista/confirmarEliminar.php';
-                include $this->vista;
+                return $asignatura;
+                
             }
 
             else {
@@ -68,7 +70,6 @@
             }
 
             header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
-            include $this->vista;
         }
 
         // Modifica la fila de una asignatura
@@ -91,7 +92,6 @@
             }            
 
             header("refresh:3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
-            include $this->vista;
         }
 
         // Elimina la fila de asignatura concreta
@@ -112,7 +112,6 @@
             }
 
             header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
-            include $this->vista;
         }
 
         // Obtener filas de profesores
@@ -121,14 +120,6 @@
             $profesores = $datos->obtenerProfesores();
             $this->vista = 'MVC/vista/formularioInsertar.php';
             return $profesores;
-        }
-
-        // Obtener filas de clases
-        function obtenerClases() {
-            $datos = new Cmodelo();
-            $clases = $datos->obtenerClases();
-            $this->vista = 'MVC/vista/formularioInsertar.php';
-            return $clases;
         }
 
         // Obtener las asignaturas de una clase concreta
@@ -147,13 +138,14 @@
 
         // Obtener clases y profesores
         function obtenerClasesYProfesores() {
+            $clases = new CmodeloClase();
             $clasesProfesores = [
-                "clases" => $this->obtenerClases(),
+                "clases" => $clases->obtenerClases(),
                 "profesores" => $this->obtenerProfesores()
             ];
 
             $this->vista = 'MVC/vista/formularioInsertar.php';
-            include $this->vista;
+            return $clasesProfesores;
         }
 
         /* VALIDACIONES */

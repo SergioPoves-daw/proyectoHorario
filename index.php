@@ -1,8 +1,9 @@
 <?php
-    $controlador = $_GET["controlador"];
-    $metodo = $_GET["metodo"];
+    $controlador = $_GET["controlador"] ?? 'Cinicio';
+    $metodo = $_GET["metodo"] ?? 'mostrarMenu';
 
-    require 'MVC/controlador/' . $_GET["controlador"] . '.php';
+    require 'MVC/controlador/' . $controlador . '.php';
     $proceso = new $controlador();
     $datos = $proceso->$metodo();
+    include $proceso->vista;
 ?>
