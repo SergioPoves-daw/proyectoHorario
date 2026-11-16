@@ -1,7 +1,7 @@
 <?php
     // Solo SQL (por ejemplo la entrada de datos)
     // Todo lo de mysqli aquí, incluso el fetch, para usarlo en la vista
-    class Cmodelo {
+    class CmodeloAsignatura {
         private $conexion;
 
         function __construct() {
@@ -64,26 +64,11 @@
             return $profesores;
         }
 
-        // Obtener todas las clases
-        function obtenerClases() {
-            $sql = 'SELECT * FROM clases';
+        function obtenerProfesorAsignatura($idAsignatura) {
+            $sql = 'SELECT idProfesor FROM asignaturas WHERE idAsignatura = '. $idAsignatura . ';';
             $resultado = $this->conexion->query($sql);
-            $clases = [];
-
-            if ($resultado->num_rows > 0) {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $clases[] = $fila;
-                }
-            }
-            return $clases;
-        }
-
-        // Obtener una clase concreta
-        function obtenerClase($idClase) {
-            $sql = 'SELECT * FROM clases WHERE idClase = ' . $idClase . ';';
-            $resultado = $this->conexion->query($sql);
-            $clase = $resultado->fetch_assoc();
-            return $clase;
+            $profesor = $resultado->fetch_array();
+            return $profesor["idProfesor"];
         }
     }
 ?>

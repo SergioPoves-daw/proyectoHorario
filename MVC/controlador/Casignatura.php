@@ -1,5 +1,5 @@
 <?php
-    require 'MVC/modelo/Cmodelo.php';
+    require 'MVC/modelo/CmodeloAsignatura.php';
     require 'MVC/modelo/CmodeloClase.php';
 
     class Casignatura {
@@ -8,7 +8,7 @@
 
         // Obtener filas de la BD
         function obtenerAsignaturas() {
-            $datos = new Cmodelo();
+            $datos = new CmodeloAsignatura();
             $asignaturas = $datos->obtenerAsignaturas();
             $this->vista = 'MVC/vista/infoAsignaturas.php';
             return $asignaturas;
@@ -20,7 +20,7 @@
             $id = $_GET["id"];
     
             if ($this->validarIdAsignatura($id)) {
-                $datos = new Cmodelo();
+                $datos = new CmodeloAsignatura();
                 $asignatura = $datos->obtenerAsignatura($id);
                 $this->vista = 'MVC/vista/formularioModificar.php';
                 return $asignatura;
@@ -36,7 +36,7 @@
             $id = $_GET["id"];
 
             if ($this->validarIdAsignatura($id)) {
-                $datos = new Cmodelo();
+                $datos = new CmodeloAsignatura();
                 $asignatura = $datos->obtenerAsignatura($id);
                 $this->vista = 'MVC/vista/confirmarEliminar.php';
                 return $asignatura;
@@ -59,7 +59,7 @@
             $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if ($this->validar($nombre, $codigo) && !empty($profesor) && !empty($clase)) {
-                $datos = new Cmodelo();    
+                $datos = new CmodeloAsignatura();    
                 $datos->insertarAsignatura($nombre, $codigo, $profesor, $clase);
                 $this->mensaje = "Asignatura añadida correctamente";
                 
@@ -82,7 +82,7 @@
             $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if ($this->validarIdAsignatura($id) && $this->validar($nombre, $codigo)) {
-                $datos = new Cmodelo();
+                $datos = new CmodeloAsignatura();
                 $datos->modificarAsignatura($id, $nombre, $codigo);
                 $this->mensaje = "Asignatura modificada correctamente";
             }
@@ -102,7 +102,7 @@
             $this->vista = 'MVC/vista/mensajeValidacion.php';
 
             if (!empty($id)) {
-                $datos = new Cmodelo();
+                $datos = new CmodeloAsignatura();
                 $datos->eliminarAsignatura($id);
                 $this->mensaje = "Asignatura eliminada correctamente";
             }
@@ -116,7 +116,7 @@
 
         // Obtener filas de profesores
         function obtenerProfesores() {
-            $datos = new Cmodelo();
+            $datos = new CmodeloAsignatura();
             $profesores = $datos->obtenerProfesores();
             $this->vista = 'MVC/vista/formularioInsertar.php';
             return $profesores;
@@ -156,7 +156,7 @@
 
         // Validar el id de la asignatura
         function validarIdAsignatura($id) {
-            $datos = new Cmodelo();
+            $datos = new CmodeloAsignatura();
             $existe = $datos->obtenerAsignatura($id);
             if ($existe) return true;
             if (!$existe) return false;
@@ -164,7 +164,7 @@
 
         // Validar el id de la clase
         function validarIdClase($idClase) {
-            $datos = new Cmodelo();
+            $datos = new CmodeloClase();
             $existe = $datos->obtenerClase($idClase);
             if ($existe) return true;
             if (!$existe) return false;

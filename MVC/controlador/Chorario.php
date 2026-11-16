@@ -1,12 +1,15 @@
 <?php
+    require 'MVC/modelo/CmodeloAsignatura.php';
     require 'MVC/modelo/CmodeloHorario.php';
+    require 'MVC/modelo/CmodeloClase.php';
 
     class Chorario {
         public $vista;
+        public $mensaje;
 
         // Obtiene las filas de clases para alta horario
         function obtenerClasesHorario() {
-            $datos = new CmodeloHorario();
+            $datos = new CmodeloClase();
             $clases = $datos->obtenerClases();
             $this->vista = 'MVC/vista/seleccionarClaseAltaHorario.php';
             return $clases;
@@ -14,34 +17,8 @@
 
         // Recoge los datos del formulario de horario
         function introducirDatosHorario() {
-            $datos = new CmodeloHorario();
-
-            // Recoger valores principales para la consulta
-            if (isset($_POST["clase"])) $idClase = $_POST["clase"]; // Recibe el id de la clase
-            if (isset($_POST["asignaturas"])) $idAsignaturas = $_POST["asignaturas"]; // Recibe un array del id de las asignaturas seleccionadas
-            if (isset($_POST["asignaturas"])) foreach ($idAsignaturas as $asignatura) $profesores[] = $datos->obtenerProfesorAsignatura($asignatura);
-
-            if (isset($_POST["dia"])) $dia = $_POST["dia"];
-            else $dia = "L";
-
-            if (isset($_POST["horas"])) $horaAsignaturas = $_POST["horas"];
-
-            if (isset($_POST["clase"]) && isset($_POST["asignaturas"]) && $profesores && $dia && isset($_POST["horas"])) {
-                /* Visualizar datos
-                echo $idClase;
-                foreach ($idAsignaturas as $asignatura) echo '[' . $asignatura . ']';
-                foreach ($profesores as $profesor) echo '(' . $profesor . ')';
-                echo $dia;
-                foreach ($horaAsignaturas as $hora) echo '{' . $hora . '}';*/
-
-                // Visualización simulación consulta
-                echo 'Consulta hora 1: ' . $idClase . ', ' . $idAsignaturas[0] . ', ' . $profesores[0] . ', ' . $dia . ', ' . $horaAsignaturas[0] . ';<br>';
-                echo 'Consulta hora 2: ' . $idClase . ', ' . $idAsignaturas[1] . ', ' . $profesores[1] . ', ' . $dia . ', ' . $horaAsignaturas[1] . ';<br>';
-                echo 'Consulta hora 3: ' . $idClase . ', ' . $idAsignaturas[2] . ', ' . $profesores[2] . ', ' . $dia . ', ' . $horaAsignaturas[2] . ';<br>';
-                echo 'Consulta hora 4: ' . $idClase . ', ' . $idAsignaturas[3] . ', ' . $profesores[3] . ', ' . $dia . ', ' . $horaAsignaturas[3] . ';<br>';
-                echo 'Consulta hora 5: ' . $idClase . ', ' . $idAsignaturas[4] . ', ' . $profesores[4] . ', ' . $dia . ', ' . $horaAsignaturas[4] . ';<br>';
-                echo 'Consulta hora 6: ' . $idClase . ', ' . $idAsignaturas[5] . ', ' . $profesores[5] . ', ' . $dia . ', ' . $horaAsignaturas[5] . ';<br>';
-            }
+            $datosProfesores = new CmodeloAsignatura();
+            $horario = [];
 
             // HORAS
             $horas = [
@@ -63,46 +40,83 @@
                 "V" => "Viernes"
             ];
 
-            // SABER DÍA SIGUIENTE
-            switch ($dia) {
-                case "L": 
-                    $siguienteDia = "M";
-                    break;
+            $horario = $_POST["horario"] ?? [];
 
-                case "M":
-                    $siguienteDia = "X";
-                    break;
+            // Recoger valores principales para la consulta
+            if (isset($_POST["clase"])) $idClase = $_POST["clase"]; // Recibe el id de la clase
+            if (isset($_POST["asignaturas"])) $idAsignaturas = $_POST["asignaturas"]; // Recibe un array del id de las asignaturas seleccionadas
+            if (isset($_POST["horas"])) $horaAsignaturas = $_POST["horas"];
+            $dia = $_POST["dia"] ?? "L";
+            $diaAnterior = $_POST["dia"] ?? null;
 
-                case "X":
-                    $siguienteDia = "J";
-                    break;
-
-                case "J":
-                    $siguienteDia = "V";
-                    break;
+            // Guardar/acumular datos insertados en el array de horario
+            if (isset($_POST["asignaturas"])) {
+                foreach ($idAsignaturas as $c => $asignatura) {
+                    $horario[] = [
+                        "clase" => $idClase,
+                        "asignatura" => $asignatura,
+                        "profesor" => $datosProfesores->obtenerProfesorAsignatura($asignatura),
+                        "dia" => $dia,
+                        "hora" => $horaAsignaturas[$c] // Hora que se imparte la asignatura
+                    ];
+                }
             }
 
-            // SABER CUÁNDO ES VIERNES
-            if (isset($_POST["dia"]) && $_POST["dia"] == "V") {
-                header("Location: index.php");
+            // Si se ha insertado datos del viernes, guardar datos
+            if ($dia == "V") {
+                $datos = new CmodeloHorario();
+                $resultado = $datos->insertarHorario($horario);
+
+                if ($resultado) {
+                    $this->mensaje = "Horario guardado correctamente";
+                }
+                else {
+                    $this->mensaje = "Error al guardar el horario";
+                }
+
+                $this->vista = 'MVC/vista/mensajeValidacion.php';
+                header("refresh: 3 url=index.php?controlador=Cinicio&metodo=mostrarMenu");
             }
 
-            // $datosHorario[] = [$idClase, $idAsignaturas, $profesores, $dia, $horaAsignaturas];
+            // Si no, seguir pasando días e insertando datos
+            else {
+                // SABER DÍA SIGUIENTE
+                switch ($diaAnterior) {
+                    case "L": 
+                        $dia = "M";
+                        break;
 
-            // FUNCIÓN PRINCIPAL
-            $asignaturas = $datos->obtenerAsignaturasClase($idClase);
-            $this->vista = 'MVC/vista/altaHorario.php';
+                    case "M":
+                        $dia = "X";
+                        break;
 
-            $datos = [
-                "clase" => $idClase, 
-                "asignaturas" => $asignaturas, 
-                "dias" => $dias,
-                "dia" => $dia,
-                "siguienteDia" => $siguienteDia,
-                "horas" => $horas
-            ];
+                    case "X":
+                        $dia = "J";
+                        break;
 
-            return $datos;
+                    case "J":
+                        $dia = "V";
+                        break;
+                }
+
+                // FUNCIÓN PRINCIPAL
+                $datos = new CmodeloClase();
+                $asignaturas = $datos->obtenerAsignaturasClase($idClase);
+                $this->vista = 'MVC/vista/altaHorario.php';
+
+                // Datos a mostrar en el formulario
+                $datos = [
+                    "clase" => $idClase, 
+                    "asignaturas" => $asignaturas, 
+                    "dias" => $dias,
+                    "dia" => $dia,
+                    "horas" => $horas,
+                    "horario" => $horario
+                ];
+
+                // Envía de nuevo los datos que ya tiene para que el formulario sepa el día, datos insertados, etc...
+                return $datos;
+            }
         }
     }
 ?>
