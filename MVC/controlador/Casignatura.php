@@ -27,7 +27,7 @@
             }
 
             else {
-                header("Location: index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+                $this->vista = "index.php?controlador=Casignatura&metodo=obtenerAsignaturas";
             }
         }
         
@@ -44,7 +44,7 @@
             }
 
             else {
-                header("Location: index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+                $this->vista = "index.php?controlador=Casignatura&metodo=obtenerAsignaturas";
             }
         }
 

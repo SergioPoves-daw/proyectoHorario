@@ -15,6 +15,7 @@
 
             // Almacenar datos guardados anteriormente y enviar datos anteriores y nuevos al array
             // Guarda día a día. Ej: Lunes genera 7 entradas (7 horas) cada una con su asignatura, dia, hora, etc...
+            // Accede al valor almacenado anteriormente con $i (índice asignado en el controlador, aquí solo accede)    
             foreach ($datos["horario"] as $i => $consulta) {
                 echo '<input type="hidden" name="horario[' . $i . '][clase]" value="' . $consulta["clase"] . '">';
                 echo '<input type="hidden" name="horario[' . $i . '][asignatura]" value="' . $consulta["asignatura"] . '">';

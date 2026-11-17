@@ -40,7 +40,7 @@
                 "V" => "Viernes"
             ];
 
-            $horario = $_POST["horario"] ?? [];
+            $horario = $_POST["horario"] ?? []; // Recibe los input hidden, almacenando el total de entradas
 
             // Recoger valores principales para la consulta
             if (isset($_POST["clase"])) $idClase = $_POST["clase"]; // Recibe el id de la clase
