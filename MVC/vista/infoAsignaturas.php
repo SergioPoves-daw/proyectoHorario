@@ -45,7 +45,7 @@
                 }
             ?>
         </table>
-        <a href="index.php?controlador=Casignatura&metodo=obtenerClasesYProfesores">Añadir</a>
+        <a href="index.php?controlador=Cclase&metodo=obtenerClasesYProfesores">Añadir</a>
         <a href="index.php?controlador=Cinicio&metodo=mostrarMenu">Volver</a>
     </body>
 </html>

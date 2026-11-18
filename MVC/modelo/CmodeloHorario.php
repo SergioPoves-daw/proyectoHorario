@@ -29,5 +29,13 @@
                 return false;
             }
         }
+
+        function obtenerFilaHorario($idClase) {
+            $sql = 'SELECT * FROM horario WHERE idClase =' . $idClase . ';';
+            $resultado = $this->conexion->query($sql);
+
+            if ($resultado->num_rows > 0) return true;
+            else return false;
+        }
     }
 ?>

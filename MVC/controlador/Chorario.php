@@ -7,19 +7,32 @@
         public $vista;
         public $mensaje;
 
-        // Obtiene las filas de clases para alta horario
-        function obtenerClasesHorario() {
+        // Obtiene las filas de clases para alta horario para seleccionar
+        function obtenerClasesParaHorario() {
             $datos = new CmodeloClase();
             $clases = $datos->obtenerClases();
             $this->vista = 'MVC/vista/seleccionarClaseAltaHorario.php';
             return $clases;
         }
 
+        // Saber si una clase tiene horario
+        function obtenerHorarioClase($idClase) {
+            $datos = new CmodeloHorario();
+            $existe = $datos->obtenerFilaHorario($idClase);
+            return $existe;
+        }
+
         // Recoge los datos del formulario de horario
         function introducirDatosHorario() {
-            $datosProfesores = new CmodeloAsignatura();
-            $horario = [];
 
+            // Si la clase ya tiene un horario, no permite introducir uno nuevo
+            if ($this->obtenerHorarioClase($_POST["clase"])) {
+                $this->mensaje = "Esta clase ya tiene un horario";
+                $this->vista = "MVC/vista/mensajeValidacion.php";
+                return;
+            }
+
+            $datosAsignaturas = new CmodeloAsignatura();
             // HORAS
             $horas = [
                 1 => "8:15-9:10",
@@ -55,7 +68,7 @@
                     $horario[] = [
                         "clase" => $idClase,
                         "asignatura" => $asignatura,
-                        "profesor" => $datosProfesores->obtenerProfesorAsignatura($asignatura),
+                        "profesor" => $datosAsignaturas->obtenerProfesorAsignatura($asignatura),
                         "dia" => $dia,
                         "hora" => $horaAsignaturas[$c] // Hora que se imparte la asignatura
                     ];
@@ -100,8 +113,7 @@
                 }
 
                 // FUNCIÓN PRINCIPAL
-                $datos = new CmodeloClase();
-                $asignaturas = $datos->obtenerAsignaturasClase($idClase);
+                $asignaturas = $datosAsignaturas->obtenerAsignaturasClase($idClase);
                 $this->vista = 'MVC/vista/altaHorario.php';
 
                 // Datos a mostrar en el formulario

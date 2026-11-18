@@ -25,5 +25,6 @@
         <br/><br/>
         <input type="submit" value="Modificar asignatura">
     </form>
+    <a href="index.php?controlador=Casignatura&metodo=obtenerAsignaturas">Volver</a>
 </body>
 </html>

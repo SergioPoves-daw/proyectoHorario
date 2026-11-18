@@ -48,15 +48,13 @@ table, td, th {
     padding: 10px;
 }
 
-a {
-    padding: 5px;
-    border: solid 2px black;
-    margin: 70px;
-    background-color: lightgray;
-}
-
 td a {
     margin: 5px;
+    padding: 5px;
+    border: solid 2px black;
+    background-color: plum;
+    border-radius: 10px;
+    text-decoration: none;
 }
 
 th {

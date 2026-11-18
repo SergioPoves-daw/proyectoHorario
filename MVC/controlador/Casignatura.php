@@ -19,16 +19,15 @@
             // Lo recibe del index.php que recibe el valor del header de vista/control.php
             $id = $_GET["id"];
     
-            if ($this->validarIdAsignatura($id)) {
+            if ($id && $this->validarIdAsignatura($id)) {
                 $datos = new CmodeloAsignatura();
                 $asignatura = $datos->obtenerAsignatura($id);
                 $this->vista = 'MVC/vista/formularioModificar.php';
                 return $asignatura;
             }
-
-            else {
-                $this->vista = "index.php?controlador=Casignatura&metodo=obtenerAsignaturas";
-            }
+            
+            $this->mensaje = "Validación incorrecta";
+            $this->vista = "MVC/vista/mensajeValidacion.php";
         }
         
         function obtenerAsignaturaEliminar() {
@@ -43,9 +42,8 @@
                 
             }
 
-            else {
-                $this->vista = "index.php?controlador=Casignatura&metodo=obtenerAsignaturas";
-            }
+            $this->mensaje = "Validación incorrecta";
+            $this->vista = "MVC/vista/mensajeValidacion.php";
         }
 
         // Insertar fila de nueva asignatura
@@ -68,8 +66,6 @@
             else {
                 $this->mensaje = "Datos no válidos";
             }
-
-            header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
         }
 
         // Modifica la fila de una asignatura
@@ -89,9 +85,7 @@
 
             else {
                 $this->mensaje = "Datos no válidos";
-            }            
-
-            header("refresh:3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
+            }
         }
 
         // Elimina la fila de asignatura concreta
@@ -110,42 +104,21 @@
             else {
                 $this->mensaje = "Asignatura no encontrada";
             }
-
-            header("refresh: 3 url=index.php?controlador=Casignatura&metodo=obtenerAsignaturas");
-        }
-
-        // Obtener filas de profesores
-        function obtenerProfesores() {
-            $datos = new CmodeloAsignatura();
-            $profesores = $datos->obtenerProfesores();
-            $this->vista = 'MVC/vista/formularioInsertar.php';
-            return $profesores;
         }
 
         // Obtener las asignaturas de una clase concreta
         function obtenerAsignaturasClase($idClase) {
-            if ($this->validarIdClase($idClase)) {
-                $datos = new CmodeloHorario();
+            if ($idClase && $this->validarIdClase($idClase)) {
+                $datos = new CmodeloAsignatura();
                 $asignaturas = $datos->obtenerAsignaturasClase($idClase);
                 $this->vista = 'MVC/vista/altaHorario.php';
                 return $asignaturas;
             }
 
             else {
-                header("Location: listarAsignaturas.php");
+                $this->mensaje = "Datos no válidos";
+                $this->vista = "MVC/vista/mensajeValidacion.php";
             }
-        }
-
-        // Obtener clases y profesores
-        function obtenerClasesYProfesores() {
-            $clases = new CmodeloClase();
-            $clasesProfesores = [
-                "clases" => $clases->obtenerClases(),
-                "profesores" => $this->obtenerProfesores()
-            ];
-
-            $this->vista = 'MVC/vista/formularioInsertar.php';
-            return $clasesProfesores;
         }
 
         /* VALIDACIONES */
