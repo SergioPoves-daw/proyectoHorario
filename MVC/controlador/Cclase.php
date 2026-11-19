@@ -3,6 +3,7 @@
     require 'MVC/modelo/CmodeloAsignatura.php';
 
     class Cclase {
+        public $vista;
 
     // Obtener filas de clases
         function obtenerClases() {
